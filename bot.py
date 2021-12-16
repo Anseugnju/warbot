@@ -6,6 +6,7 @@ import os, random
 import asyncio
 봇토큰=os.environ.get['token']
 채널ID=int(os.environ.get['chid'])
+print(채널ID)
 명령어="!"
 bot = commands.Bot(command_prefix=명령어)
 시작종류=0 #랜덤시작=0 순서시작=1
