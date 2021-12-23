@@ -28,7 +28,7 @@ bot = commands.Bot(command_prefix=명령어)
     '서폿':""}#빨강이
 
 
-version = "2.0"
+version = "2.1"
 
 @bot.event
 async def on_ready(): 
@@ -47,6 +47,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message, pass_context=True):
+    print(message)
     time.sleep(1)
     if message.channel.id == 채널ID:
         if not message.content.startswith(명령어):
@@ -202,11 +203,13 @@ async def 라인제거(ctx):
 
 @bot.command(aliases=["참여","추가"])
 async def 참가(ctx,*args):
+    print(ctx, args)
     인원1.extend(args)
     await ctx.message.delete()
 
 @bot.command(aliases=["삭제","제외"])
 async def 제거(ctx,*args):
+    print(ctx, args)
     if len(인원1)==0:
         await ctx.message.delete()
         return
