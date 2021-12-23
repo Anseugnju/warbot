@@ -27,7 +27,7 @@ bot = commands.Bot(command_prefix=명령어)
     '서폿':""}#빨강이
 
 
-version = "2.000" #버그 없겠찌
+version = "2.001" #버그 없겠찌
 
 @bot.event
 async def on_ready(): 
@@ -239,6 +239,8 @@ async def 명단초기화(ctx):
     인원1.clear()
     순서진행.clear()
     순서목록.clear()
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
     await ctx.message.delete()
 
 
