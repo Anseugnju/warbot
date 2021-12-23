@@ -189,14 +189,26 @@ async def 레드(ctx,라인):
 
 @bot.command()
 async def 라인제거(ctx):
-    순서진행.pop()
-    블루팀 =f"{팀1.get('탑'):ㅤ<5} \n {팀1.get('정글')} \n {팀1.get('미드')} \n {팀1.get('원딜')} \n {팀1.get('서폿')}"
-    레드팀 =f"ㅤㅤ{팀2.get('탑')} \n ㅤㅤ{팀2.get('정글')} \n ㅤㅤ{팀2.get('미드')} \n ㅤㅤ{팀2.get('원딜')} \n ㅤㅤ{팀2.get('서폿')}"
-    라인=f"탑 \n 정글 \n 미드 \n 원딜 \n 서폿"
-    embed = discord.Embed(title="팀", description="", color=0xAAFFFF)
-    embed.add_field(name="블루팀", value=(블루팀), inline=True)
-    embed.add_field(name="라인", value=(라인), inline=True)
-    embed.add_field(name="ㅤㅤ레드팀", value=(레드팀), inline=True)
+    if 순서진행[-1] == 0:
+        팀1.update(탑="")
+    elif 순서진행[-1] == 1:
+        팀1.update(정글="")
+    elif 순서진행[-1] == 2:
+        팀1.update(미드="")
+    elif 순서진행[-1] == 3:
+        팀1.update(원딜="")
+    elif 순서진행[-1] == 4:
+        팀1.update(서폿="")
+    elif 순서진행[-1] == 5:
+        팀2.update(탑="")
+    elif 순서진행[-1] == 6:
+        팀2.update(정글="")
+    elif 순서진행[-1] == 7:
+        팀2.update(미드="")
+    elif 순서진행[-1] == 8:
+        팀2.update(원딜="")
+    elif 순서진행[-1] == 9:
+        팀2.update(서폿="")
     await ctx.message.delete()
 
 
