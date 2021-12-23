@@ -47,8 +47,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message, pass_context=True):
-    print(message)
-    time.sleep(1)
+    print(f"{message.author.bot} : {message.content}")
+    time.sleep(3)
     if message.channel.id == 채널ID:
         if not message.content.startswith(명령어):
             if message.author.bot == 1:
