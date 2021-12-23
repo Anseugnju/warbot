@@ -27,7 +27,7 @@ bot = commands.Bot(command_prefix=명령어)
     '서폿':""}#빨강이
 
 
-version = "2.1"
+version = "2.000" #버그 없겠찌
 
 @bot.event
 async def on_ready(): 
@@ -99,7 +99,7 @@ async def 새로고침(message,helpme): #노래 상태 1초마다 변경
             await helpme.edit(embed=embed)
             await asyncio.sleep(1)
         except:
-            os.exit()
+            pass
 
 
 @bot.event
@@ -120,6 +120,9 @@ async def 버전(ctx):
 
 @bot.command(aliases=["1"])
 async def 블루(ctx,라인):
+    if 시작종류==0:
+        await ctx.message.delete()
+        return
     if 라인 == "탑":
         팀1.update(탑=순서목록[len(순서진행)])
         순서진행.append(0)
@@ -147,6 +150,9 @@ async def 블루(ctx,라인):
 
 @bot.command(aliases=["2"])
 async def 레드(ctx,라인):
+    if 시작종류==0:
+        await ctx.message.delete()
+        return
     if 라인 == "탑":
         팀2.update(탑=순서목록[len(순서진행)])
         순서진행.append(5)
@@ -174,6 +180,9 @@ async def 레드(ctx,라인):
 
 @bot.command()
 async def 라인제거(ctx):
+    if 시작종류==0:
+        await ctx.message.delete()
+        return
     if 순서진행[-1] == 0:
         팀1.update(탑="")
     elif 순서진행[-1] == 1:
@@ -258,14 +267,6 @@ async def 랜덤시작(ctx):
         팀2.update(서폿=인원1[랜덤라인[9]])
     except:
         pass
-
-    블루팀 =f"{팀1.get('탑'):ㅤ<5} \n {팀1.get('정글')} \n {팀1.get('미드')} \n {팀1.get('원딜')} \n {팀1.get('서폿')}"
-    레드팀 =f"ㅤㅤ{팀2.get('탑')} \n ㅤㅤ{팀2.get('정글')} \n ㅤㅤ{팀2.get('미드')} \n ㅤㅤ{팀2.get('원딜')} \n ㅤㅤ{팀2.get('서폿')}"
-    라인=f"탑 \n 정글 \n 미드 \n 원딜 \n 서폿"
-    embed = discord.Embed(title="팀", description="", color=0xAAFFFF)
-    embed.add_field(name="블루팀", value=(블루팀), inline=True)
-    embed.add_field(name="라인", value=(라인), inline=True)
-    embed.add_field(name="ㅤㅤ레드팀", value=(레드팀), inline=True)
     
     await ctx.message.delete()
     
