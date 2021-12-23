@@ -48,7 +48,7 @@ async def on_ready():
 async def on_message(message, pass_context=True):
     if message.author.bot == False:
         print(f"{message.author.name} : {message.content}")
-    time.sleep(3)
+    await asyncio.sleep(2)
     if message.channel.id == 채널ID:
         if not message.content.startswith(명령어):
             if message.author.bot == 1:
