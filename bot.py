@@ -69,7 +69,7 @@ def 도움(): #도움말 내용
     embed.add_field(name=f"{명령어}참가",value="내전에 들어가짐",inline=False)
     embed.add_field(name=f"{명령어}제거",value="내전에서 나가짐",inline=False)
     embed.add_field(name=f"{명령어}랜덤시작",value="랜덤하게 팀이 정해짐",inline=False)
-    embed.add_field(name=f"{명령어}순서시작",value=f"{명령어}블루 (라인) {명령어}레드 (라인)",inline=False)
+    embed.add_field(name=f"{명령어}순서시작",value=f"{명령어}블루 (라인) {명령어}레드 (라인) {명령어}라인제거",inline=False)
     return embed
 
 def embed_play(): #노래 임베드 내용
