@@ -6,7 +6,6 @@ import os, random
 import asyncio
 봇토큰=os.environ.get('token')
 채널ID=int(os.environ.get('chid'))
-print(채널ID)
 명령어="!"
 bot = commands.Bot(command_prefix=명령어)
 시작종류=0 #랜덤시작=0 순서시작=1
@@ -47,7 +46,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message, pass_context=True):
-    print(f"{message.author.name} : {message.content}")
+    if message.author.bot == False:
+        print(f"{message.author.name} : {message.content}")
     time.sleep(3)
     if message.channel.id == 채널ID:
         if not message.content.startswith(명령어):
@@ -247,7 +247,6 @@ async def 랜덤시작(ctx):
         while num in 랜덤라인:
             num = random.randrange(0,인원수)
         랜덤라인.append(num)
-    print(랜덤라인)
     try:
         팀1.update(탑=인원1[랜덤라인[0]])
         팀2.update(탑=인원1[랜덤라인[1]])
