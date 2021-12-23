@@ -234,7 +234,11 @@ async def 제거(ctx,*args):
 
 @bot.command()
 async def 명단초기화(ctx):
+    global 시작종류
+    시작종류=0
     인원1.clear()
+    순서진행.clear()
+    순서목록.clear()
     await ctx.message.delete()
 
 
