@@ -47,7 +47,7 @@ async def on_ready():
 @bot.event
 async def on_message(message, pass_context=True):
     await asyncio.sleep(2)
-    if message.author.id == 289770515499974658:
+    if message.author.id == 283812834855616512:
         ch = bot.get_channel(채널ID)
         await message.delete()
         안우진 = await ch.send("죽빵날아감")
