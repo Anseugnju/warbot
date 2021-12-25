@@ -130,18 +130,48 @@ async def 블루(ctx,라인):
         await ctx.message.delete()
         return
     if 라인 == "탑":
+        if 팀1.get('탑') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀1.update(탑=순서목록[len(순서진행)])
         순서진행.append(0)
     elif 라인 == "정글":
+        if 팀1.get('정글') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀1.update(정글=순서목록[len(순서진행)])
         순서진행.append(1)
     elif 라인 == "미드":
+        if 팀1.get('미드') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀1.update(미드=순서목록[len(순서진행)])
         순서진행.append(2)
     elif 라인 == "원딜":
+        if 팀1.get('원딜') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀1.update(원딜=순서목록[len(순서진행)])
         순서진행.append(3)
     elif 라인 == "서폿":
+        if 팀1.get('서폿') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀1.update(서폿=순서목록[len(순서진행)])
         순서진행.append(4)
     else:
@@ -160,18 +190,48 @@ async def 레드(ctx,라인):
         await ctx.message.delete()
         return
     if 라인 == "탑":
+        if 팀2.get('탑') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀2.update(탑=순서목록[len(순서진행)])
         순서진행.append(5)
     elif 라인 == "정글":
+        if 팀2.get('정글') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀2.update(정글=순서목록[len(순서진행)])
         순서진행.append(6)
     elif 라인 == "미드":
+        if 팀2.get('미드') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀2.update(미드=순서목록[len(순서진행)])
         순서진행.append(7)
     elif 라인 == "원딜":
+        if 팀2.get('원딜') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀2.update(원딜=순서목록[len(순서진행)])
         순서진행.append(8)
     elif 라인 == "서폿":
+        if 팀2.get('서폿') != "":
+            있음 = await ctx.send("이미 사람이 있음")
+            await asyncio.sleep(5)
+            await 있음.delete()
+            await ctx.message.delete()
+            return
         팀2.update(서폿=순서목록[len(순서진행)])
         순서진행.append(9)
     else:
@@ -259,8 +319,8 @@ async def 랜덤시작(ctx):
     시작종류=0
     인원수=len(인원1)
     num=random.randrange(0,인원수)
-    팀1.update(탑='',정글='',미드='',원딜='',서폿='')
-    팀2.update(탑='',정글='',미드='',원딜='',서폿='')
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
     랜덤라인=[]
     for i in range(인원수):
         while num in 랜덤라인:
@@ -289,8 +349,8 @@ async def 순서시작(ctx):
         return
     global 시작종류
     시작종류=1
-    팀1.update(탑='',정글='',미드='',원딜='',서폿='')
-    팀2.update(탑='',정글='',미드='',원딜='',서폿='')
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
     순서목록.clear()
     순서진행.clear()
     num=random.randrange(0,(len(인원1)))
