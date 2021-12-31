@@ -4,10 +4,8 @@ from discord.ext import commands
 import time
 import os, random
 import asyncio
-#봇토큰=os.environ.get('token')
-#채널ID=int(os.environ.get('chid'))
-봇토큰="ODUzMjUzMzczMDk3MDE3MzY2.YMSsIA.wEfTSDcWF6ahTkVeCYEZzb8Tchw"
-채널ID=920928577917157416
+봇토큰=os.environ.get('token')
+채널ID=int(os.environ.get('chid'))
 명령어="!"
 bot = commands.Bot(command_prefix=명령어)
 시작종류=0 #랜덤시작=0 순서시작=1
