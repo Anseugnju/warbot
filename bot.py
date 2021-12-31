@@ -127,6 +127,60 @@ async def on_command_error(ctx, error):
 async def 버전(ctx):
     await ctx.send(version)
 
+@bot.command()
+async def 랜덤시작(ctx):
+    if len(인원1)==0:
+        await ctx.message.delete()
+        return
+    global 시작종류
+    시작종류=0
+    인원수=len(인원1)
+    num=random.randrange(0,인원수)
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
+    랜덤라인=[]
+    for i in range(인원수):
+        while num in 랜덤라인:
+            num = random.randrange(0,인원수)
+        랜덤라인.append(num)
+    try:
+        팀1.update(탑=인원1[랜덤라인[0]])
+        팀2.update(탑=인원1[랜덤라인[1]])
+        팀1.update(정글=인원1[랜덤라인[2]])
+        팀2.update(정글=인원1[랜덤라인[3]])
+        팀1.update(미드=인원1[랜덤라인[4]])
+        팀2.update(미드=인원1[랜덤라인[5]])
+        팀1.update(원딜=인원1[랜덤라인[6]])
+        팀2.update(원딜=인원1[랜덤라인[7]])
+        팀1.update(서폿=인원1[랜덤라인[8]])
+        팀2.update(서폿=인원1[랜덤라인[9]])
+    except:
+        pass
+    await ctx.message.delete()
+    
+@bot.command()
+async def 순서시작(ctx):
+    if len(인원1)==0:
+        await ctx.message.delete()
+        return
+    global 시작종류
+    시작종류=1
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
+    순서목록.clear()
+    순서진행.clear()
+    num=random.randrange(0,(len(인원1)))
+    순서=[]
+    for i in range((len(인원1))):
+        while num in 순서:
+            num = random.randrange(0,(len(인원1)))
+        순서.append(num)
+    i=0
+    while i<len(순서):
+        순서목록.append(인원1[순서[i]])
+        i+=1
+    await ctx.message.delete()
+
 @bot.command(aliases=["1"])
 async def 블루(ctx,라인):
     if 시작종류==0:
@@ -296,7 +350,6 @@ async def 제거(ctx,*args):
             i +=1
         else:
             i +=1
-
     await ctx.message.delete()
 
 
@@ -310,62 +363,6 @@ async def 명단초기화(ctx):
     순서목록.clear()
     팀1.update(탑="",정글="",미드="",원딜="",서폿="")
     팀2.update(탑="",정글="",미드="",원딜="",서폿="")
-    await ctx.message.delete()
-
-
-@bot.command()
-async def 랜덤시작(ctx):
-    if len(인원1)==0:
-        await ctx.message.delete()
-        return
-    global 시작종류
-    시작종류=0
-    인원수=len(인원1)
-    num=random.randrange(0,인원수)
-    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
-    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
-    랜덤라인=[]
-    for i in range(인원수):
-        while num in 랜덤라인:
-            num = random.randrange(0,인원수)
-        랜덤라인.append(num)
-    try:
-        팀1.update(탑=인원1[랜덤라인[0]])
-        팀2.update(탑=인원1[랜덤라인[1]])
-        팀1.update(정글=인원1[랜덤라인[2]])
-        팀2.update(정글=인원1[랜덤라인[3]])
-        팀1.update(미드=인원1[랜덤라인[4]])
-        팀2.update(미드=인원1[랜덤라인[5]])
-        팀1.update(원딜=인원1[랜덤라인[6]])
-        팀2.update(원딜=인원1[랜덤라인[7]])
-        팀1.update(서폿=인원1[랜덤라인[8]])
-        팀2.update(서폿=인원1[랜덤라인[9]])
-    except:
-        pass
-    
-    await ctx.message.delete()
-    
-@bot.command()
-async def 순서시작(ctx):
-    if len(인원1)==0:
-        await ctx.message.delete()
-        return
-    global 시작종류
-    시작종류=1
-    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
-    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
-    순서목록.clear()
-    순서진행.clear()
-    num=random.randrange(0,(len(인원1)))
-    순서=[]
-    for i in range((len(인원1))):
-        while num in 순서:
-            num = random.randrange(0,(len(인원1)))
-        순서.append(num)
-    i=0
-    while i<len(순서):
-        순서목록.append(인원1[순서[i]])
-        i+=1
     await ctx.message.delete()
 
 
