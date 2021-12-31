@@ -141,8 +141,8 @@ async def on_reaction_add(reaction, user):
         if userid in re_list:
             await reaction.remove(user)
             return
-        re_list.extend(userid)
-        re_yes_list.extend(userid)
+        re_list.append(userid)
+        re_yes_list.append(userid)
         await reaction.remove(user)
         return
     if str(reaction.emoji) == re_no:
@@ -150,8 +150,8 @@ async def on_reaction_add(reaction, user):
         if userid in re_list:
             await reaction.remove(user)
             return
-        re_list.extend(userid)
-        re_no_list.extend(userid)
+        re_list.append(userid)
+        re_no_list.append(userid)
         await reaction.remove(user)
         return
 
