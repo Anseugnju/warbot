@@ -26,6 +26,11 @@ bot = commands.Bot(command_prefix=명령어)
     '원딜':"",
     '서폿':""}#빨강이
 
+re_yes="👍"
+re_no="👎"
+re_list=[]
+re_yes_list=[]
+re_no_list=[]
 
 version = "2.001" #버그 없겠찌
 
@@ -42,6 +47,8 @@ async def on_ready():
     helpme = await ch.send(embed=embed)
     embed = embed_play()
     message = await ch.send(embed = embed)
+    await message.add_reaction(re_yes) #반응추가
+    await message.add_reaction(re_no)
     await 새로고침(message,helpme)
 
 @bot.event
@@ -74,7 +81,6 @@ def 도움(): #도움말 내용
     embed = discord.Embed(
         title="도움말",
         colour=0x0097ff)
-
     embed.add_field(name=f"{명령어}참가",value="내전에 들어가짐",inline=False)
     embed.add_field(name=f"{명령어}제거",value="내전에서 나가짐",inline=False)
     embed.add_field(name=f"{명령어}랜덤시작",value="랜덤하게 팀이 정해짐",inline=False)
@@ -89,15 +95,14 @@ def embed_play(): #노래 임베드 내용
     if len(인원1)==0:
         인원=" "
     if 시작종류==0:
-        embed = discord.Embed(title="팀", description=f"명단 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 \n{인원}", color=0xAAFFFF)
     if 시작종류==1:
-        embed = discord.Embed(title="팀", description=f"명단 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 \n{인원}", color=0xAAFFFF)
         embed.add_field(name="순서", value=" ".join(순서목록), inline=False)
     embed.add_field(name="블루팀", value=블루팀)
     embed.add_field(name="라인", value=(라인), inline=True)
     embed.add_field(name="ㅤㅤ레드팀", value=(레드팀), inline=True)
     return embed
-
 
 async def 새로고침(message,helpme): #노래 상태 1초마다 변경
     while not bot.is_closed():
@@ -109,7 +114,6 @@ async def 새로고침(message,helpme): #노래 상태 1초마다 변경
             await asyncio.sleep(1)
         except:
             pass
-
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -126,6 +130,66 @@ async def on_command_error(ctx, error):
 @bot.command()
 async def 버전(ctx):
     await ctx.send(version)
+
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    if user.bot == 1: #봇이면 패스
+        return None
+    if str(reaction.emoji) == re_yes:
+        userid = user.id
+        if userid in re_list:
+            await reaction.remove(user)
+            return
+        re_list.extend(userid)
+        re_yes_list.extend(userid)
+        await reaction.remove(user)
+        return
+    if str(reaction.emoji) == re_no:
+        userid = user.id
+        if userid in re_list:
+            await reaction.remove(user)
+            return
+        re_list.extend(userid)
+        re_no_list.extend(userid)
+        await reaction.remove(user)
+        return
+
+@bot.command(aliases=["참여","추가"])
+async def 참가(ctx,*args):
+    인원1.extend(args)
+    await ctx.message.delete()
+
+@bot.command(aliases=["삭제","제외"])
+async def 제거(ctx,*args):
+    if len(인원1)==0:
+        await ctx.message.delete()
+        return
+    dellist=[]
+    dellist.extend(args)
+    i = 0
+    while i < len(dellist):
+        if dellist[i] in 인원1:
+            인원1.remove(dellist[i])
+            i +=1
+        else:
+            i +=1
+    await ctx.message.delete()
+
+@bot.command()
+async def 명단초기화(ctx):
+    global 시작종류
+    시작종류=0
+    인원1.clear()
+    순서진행.clear()
+    순서목록.clear()
+    re_yes_list.clear()
+    re_no_list.clear()
+    re_list.clear()
+    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
+    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
+    await ctx.message.delete()
+
 
 @bot.command()
 async def 랜덤시작(ctx):
@@ -156,6 +220,9 @@ async def 랜덤시작(ctx):
         팀2.update(서폿=인원1[랜덤라인[9]])
     except:
         pass
+    re_yes_list.clear()
+    re_no_list.clear()
+    re_list.clear()
     await ctx.message.delete()
     
 @bot.command()
@@ -179,6 +246,9 @@ async def 순서시작(ctx):
     while i<len(순서):
         순서목록.append(인원1[순서[i]])
         i+=1
+    re_yes_list.clear()
+    re_no_list.clear()
+    re_list.clear()
     await ctx.message.delete()
 
 @bot.command(aliases=["1"])
@@ -330,40 +400,6 @@ async def 라인제거(ctx):
     await ctx.message.delete()
 
 
-
-@bot.command(aliases=["참여","추가"])
-async def 참가(ctx,*args):
-    인원1.extend(args)
-    await ctx.message.delete()
-
-@bot.command(aliases=["삭제","제외"])
-async def 제거(ctx,*args):
-    if len(인원1)==0:
-        await ctx.message.delete()
-        return
-    dellist=[]
-    dellist.extend(args)
-    i = 0
-    while i < len(dellist):
-        if dellist[i] in 인원1:
-            인원1.remove(dellist[i])
-            i +=1
-        else:
-            i +=1
-    await ctx.message.delete()
-
-
-
-@bot.command()
-async def 명단초기화(ctx):
-    global 시작종류
-    시작종류=0
-    인원1.clear()
-    순서진행.clear()
-    순서목록.clear()
-    팀1.update(탑="",정글="",미드="",원딜="",서폿="")
-    팀2.update(탑="",정글="",미드="",원딜="",서폿="")
-    await ctx.message.delete()
 
 
 bot.run(봇토큰)
