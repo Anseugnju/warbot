@@ -4,8 +4,10 @@ from discord.ext import commands
 import time
 import os, random
 import asyncio
-봇토큰=os.environ.get('token')
-채널ID=int(os.environ.get('chid'))
+#봇토큰=os.environ.get('token')
+#채널ID=int(os.environ.get('chid'))
+봇토큰="ODUzMjUzMzczMDk3MDE3MzY2.YMSsIA.wEfTSDcWF6ahTkVeCYEZzb8Tchw"
+채널ID=920928577917157416
 명령어="!"
 bot = commands.Bot(command_prefix=명령어)
 시작종류=0 #랜덤시작=0 순서시작=1
@@ -137,7 +139,7 @@ async def on_reaction_add(reaction, user):
     if user.bot == 1: #봇이면 패스
         return None
     if str(reaction.emoji) == re_yes:
-        userid = user.id
+        userid = user.name
         if userid in re_list:
             await reaction.remove(user)
             return
@@ -146,7 +148,7 @@ async def on_reaction_add(reaction, user):
         await reaction.remove(user)
         return
     if str(reaction.emoji) == re_no:
-        userid = user.id
+        userid = user.name
         if userid in re_list:
             await reaction.remove(user)
             return
@@ -154,6 +156,12 @@ async def on_reaction_add(reaction, user):
         re_no_list.append(userid)
         await reaction.remove(user)
         return
+
+@bot.command()
+async def 확인(ctx,*args):
+    print(re_list)
+    print(re_yes_list)
+    print(re_no_list)
 
 @bot.command(aliases=["참여","추가"])
 async def 참가(ctx,*args):
