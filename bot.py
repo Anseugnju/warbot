@@ -53,8 +53,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message, pass_context=True):
-    if message.author.bot == False:
-        print(f"{message.author.name} : {message.content}")
     await asyncio.sleep(1)
     if message.channel.id == 채널ID:
         if message.author.bot == False:
