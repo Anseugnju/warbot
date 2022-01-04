@@ -152,6 +152,10 @@ async def on_reaction_add(reaction, user):
         re_no_list.append(userid)
         await reaction.remove(user)
         return
+    if str(reaction.emoji) != re_no and str(reaction.emoji) != re_yes:
+        await reaction.remove(user)
+        return
+
 
 @bot.command()
 async def 확인(ctx,*args):
