@@ -93,9 +93,9 @@ def embed_play(): #임베드 내용
     if len(인원1)==0:
         인원=" "
     if 시작종류==0:
-        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원)}명 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원1)}명 \n{인원}", color=0xAAFFFF)
     if 시작종류==1:
-        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원)}명 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원1)}명 \n{인원}", color=0xAAFFFF)
         embed.add_field(name="순서", value=" ".join(순서목록), inline=False)
     embed.add_field(name="블루팀", value=블루팀)
     embed.add_field(name="라인", value=(라인), inline=True)
