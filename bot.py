@@ -85,7 +85,7 @@ def 도움(): #도움말 내용
     embed.add_field(name=f"{명령어}순서시작",value=f"{명령어}블루 (라인) {명령어}레드 (라인) {명령어}라인제거",inline=False)
     return embed
 
-def embed_play(): #노래 임베드 내용
+def embed_play(): #임베드 내용
     블루팀 =f"{팀1.get('탑'):ㅤ<5} \n {팀1.get('정글')} \n {팀1.get('미드')} \n {팀1.get('원딜')} \n {팀1.get('서폿')}"
     레드팀 =f"ㅤㅤ{팀2.get('탑')} \n ㅤㅤ{팀2.get('정글')} \n ㅤㅤ{팀2.get('미드')} \n ㅤㅤ{팀2.get('원딜')} \n ㅤㅤ{팀2.get('서폿')}"
     라인=f"탑 \n 정글 \n 미드 \n 원딜 \n 서폿"
@@ -93,9 +93,9 @@ def embed_play(): #노래 임베드 내용
     if len(인원1)==0:
         인원=" "
     if 시작종류==0:
-        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원)}명 \n{인원}", color=0xAAFFFF)
     if 시작종류==1:
-        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 \n{인원}", color=0xAAFFFF)
+        embed = discord.Embed(title=f"팀    찬성:{len(re_yes_list)}명 반대:{len(re_no_list)}명", description=f"명단 {len(인원)}명 \n{인원}", color=0xAAFFFF)
         embed.add_field(name="순서", value=" ".join(순서목록), inline=False)
     embed.add_field(name="블루팀", value=블루팀)
     embed.add_field(name="라인", value=(라인), inline=True)
