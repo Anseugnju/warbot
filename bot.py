@@ -58,7 +58,7 @@ async def on_message(message, pass_context=True):
         if message.author.bot == False:
             print(f"{message.author.name} : {message.content}")
         if message.author.id == 283812834855616512:
-            ch = bot.get_channel(채널ID)
+            ch = bot.get_channel(채널ID) 
             await message.delete()
             안우진 = await ch.send("죽빵날아감")
             await asyncio.sleep(3)
@@ -132,6 +132,8 @@ async def 버전(ctx):
 
 @bot.event
 async def on_reaction_add(reaction, user):
+    if reaction.message.channel.id != 채널ID:
+        return
     if user.bot == 1: #봇이면 패스
         return None
     if str(reaction.emoji) == re_yes:
