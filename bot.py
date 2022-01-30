@@ -32,7 +32,7 @@ re_list=[]
 re_yes_list=[]
 re_no_list=[]
 
-version = "2.001" #버그 없겠찌
+version = "2.002" #버그 없겠찌
 
 @bot.event
 async def on_ready(): 
@@ -40,16 +40,17 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    global message
+    global teamc
+    global helpme
     ch = bot.get_channel(채널ID)
     await ch.purge(limit=100)
     embed=도움()
     helpme = await ch.send(embed=embed)
     embed = embed_play()
-    message = await ch.send(embed = embed)
-    await message.add_reaction(re_yes) #반응추가
-    await message.add_reaction(re_no)
-    await 새로고침(message,helpme)
+    teamc = await ch.send(embed = embed)
+    await teamc.add_reaction(re_yes) #반응추가
+    await teamc.add_reaction(re_no)
+    await 새로고침(teamc,helpme)
 
 @bot.event
 async def on_message(message, pass_context=True):
@@ -102,16 +103,14 @@ def embed_play(): #임베드 내용
     embed.add_field(name="ㅤㅤ레드팀", value=(레드팀), inline=True)
     return embed
 
-async def 새로고침(message,helpme): #노래 상태 1초마다 변경
-    while not bot.is_closed():
-        try:
-            embed=embed_play()
-            await message.edit(embed=embed)
-            embed=도움()
-            await helpme.edit(embed=embed)
-            await asyncio.sleep(1)
-        except:
-            pass
+async def 새로고침(teamc,helpme): #노래 상태 1초마다 변경
+    try:
+        embed=embed_play()
+        await teamc.edit(embed=embed)
+        embed=도움()
+        await helpme.edit(embed=embed)
+    except:
+        pass
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -144,6 +143,7 @@ async def on_reaction_add(reaction, user):
         re_list.append(userid)
         re_yes_list.append(userid)
         await reaction.remove(user)
+        await 새로고침(teamc,helpme)
         return
     if str(reaction.emoji) == re_no:
         userid = user.name
@@ -153,6 +153,7 @@ async def on_reaction_add(reaction, user):
         re_list.append(userid)
         re_no_list.append(userid)
         await reaction.remove(user)
+        await 새로고침(teamc,helpme)
         return
     if str(reaction.emoji) != re_no and str(reaction.emoji) != re_yes:
         await reaction.remove(user)
@@ -168,6 +169,7 @@ async def 확인(ctx,*args):
 @bot.command(aliases=["참여","추가"])
 async def 참가(ctx,*args):
     인원1.extend(args)
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 @bot.command(aliases=["삭제","제외"])
@@ -184,6 +186,7 @@ async def 제거(ctx,*args):
             i +=1
         else:
             i +=1
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 @bot.command()
@@ -198,6 +201,7 @@ async def 명단초기화(ctx):
     re_list.clear()
     팀1.update(탑="",정글="",미드="",원딜="",서폿="")
     팀2.update(탑="",정글="",미드="",원딜="",서폿="")
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 
@@ -233,6 +237,7 @@ async def 랜덤시작(ctx):
     re_yes_list.clear()
     re_no_list.clear()
     re_list.clear()
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
     
 @bot.command()
@@ -259,6 +264,7 @@ async def 순서시작(ctx):
     re_yes_list.clear()
     re_no_list.clear()
     re_list.clear()
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 @bot.command(aliases=["1"])
@@ -317,6 +323,7 @@ async def 블루(ctx,라인):
         time.sleep(5)
         await msg.delete()
         return
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
     
@@ -377,6 +384,7 @@ async def 레드(ctx,라인):
         time.sleep(5)
         await msg.delete()
         return
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 
@@ -407,6 +415,7 @@ async def 라인제거(ctx):
     elif 순서진행[-1] == 9:
         팀2.update(서폿="")
     순서진행.pop()
+    await 새로고침(teamc,helpme)
     await ctx.message.delete()
 
 
