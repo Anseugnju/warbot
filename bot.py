@@ -6,6 +6,7 @@ import os, random
 import asyncio
 봇토큰=os.environ.get('token')
 채널ID=int(os.environ.get('chid'))
+안라톤=int(os.environ.get('an'))
 명령어="!"
 bot = commands.Bot(command_prefix=명령어)
 시작종류=0 #랜덤시작=0 순서시작=1
@@ -31,6 +32,23 @@ re_no="👎"
 re_list=[]
 re_yes_list=[]
 re_no_list=[]
+
+emoji="<:emoji_6:899211615025631252>" 
+불="<:qnf:901485308502220800>"
+꽃="<:Rhc:901485361128161280>"
+가="<:rk:901485405734567996>"
+능="<:smd:901485427263950900>"
+종배="<:tjsrmffktm:926832012248113172>"
+태호="<:11:892457457853554738>"
+상붕이="<:rrr:913054165641592832>"
+김우희1="🐮"
+김우희2="🐶"
+드디어1="<:e1:913051502824792104>"
+드디어2="<:e2:913051554632830998>"
+드디어3="<:e3:913051572940963840>"
+드디어4="<:e4:913051586908012594>"
+호준="🦾"
+동현="🦥"
 
 version = "2.002" #버그 없겠찌
 
@@ -74,6 +92,40 @@ async def on_message(message, pass_context=True):
             await message.delete()
             return
         await bot.process_commands(message)
+    if message.channel.id == 안라톤:
+        if message.author.bot == 1:
+            return
+        if message.author.id == 273096208904486918 :
+            await message.add_reaction(종배) #step
+            return
+        if message.author.id == 289770515499974658 :
+            await message.add_reaction(가) #step
+            await message.add_reaction(능) #step
+            return
+        if message.author.id == 283801341774790660 :
+            await message.add_reaction(태호) #step
+            return
+        if message.author.id == 857622190459846706 :
+            await message.add_reaction(상붕이) #step
+            return
+        if message.author.id == 347390605447528449 :
+            await message.add_reaction(상붕이) #step
+            return
+        if message.author.id == 261105504095436800 :
+            await message.add_reaction(김우희1) #step
+            await message.add_reaction(김우희2) #step
+            return
+        if message.author.id == 796718250221371403 :
+            await message.add_reaction(김우희2) #step
+            return
+        
+        if message.author.id == 360998052342923265 :
+            await message.add_reaction(호준) #step
+            return
+        if message.author.id == 283826716424798208 :
+            await message.add_reaction(동현) #step
+            return
+        await message.add_reaction(emoji) #step
 
 
 def 도움(): #도움말 내용
