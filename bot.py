@@ -76,13 +76,6 @@ async def on_message(message, pass_context=True):
     if message.channel.id == 채널ID:
         if message.author.bot == False:
             print(f"{message.author.name} : {message.content}")
-        if message.author.id == 283812834855616512:
-            ch = bot.get_channel(채널ID) 
-            await message.delete()
-            안우진 = await ch.send("죽빵날아감")
-            await asyncio.sleep(3)
-            await 안우진.delete()
-            return
         if not message.content.startswith(명령어):
             if message.author.bot == 1:
                 return
@@ -92,8 +85,8 @@ async def on_message(message, pass_context=True):
             await message.delete()
             return
         await bot.process_commands(message)
-    if message.channel.id == 안라톤:
-        print(message.guild.id)
+    if message.guild.owner_id == 안라톤:
+        print(message.guild.owner_id)
         if message.author.bot == 1:
             return
         if message.author.id == 273096208904486918 :
