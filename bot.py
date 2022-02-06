@@ -33,7 +33,7 @@ re_list=[]
 re_yes_list=[]
 re_no_list=[]
 
-emoji="<:emoji_6:899211615025631252>" 
+emoji="<:emoji_6:899211615025631252>" #리액션봇의 리액션들
 불="<:qnf:901485308502220800>"
 꽃="<:Rhc:901485361128161280>"
 가="<:rk:901485405734567996>"
@@ -50,7 +50,7 @@ emoji="<:emoji_6:899211615025631252>"
 호준="🦾"
 동현="🦥"
 
-version = "2.002" #버그 없겠찌
+version = "2.1" #버그 없겠찌
 
 @bot.event
 async def on_ready(): 
@@ -86,7 +86,6 @@ async def on_message(message, pass_context=True):
             return
         await bot.process_commands(message)
     if message.guild.owner_id == 안라톤:
-        print(message.guild.owner_id)
         if message.author.bot == 1:
             return
         if message.author.id == 273096208904486918 :
