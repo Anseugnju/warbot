@@ -92,7 +92,7 @@ async def on_message(message, pass_context=True):
             await message.delete()
             return
         await bot.process_commands(message)
-    if message.channel.id == 안라톤:
+    if message.guild.id == 안라톤:
         if message.author.bot == 1:
             return
         if message.author.id == 273096208904486918 :
